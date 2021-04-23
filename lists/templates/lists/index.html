@@ -1,0 +1,16 @@
+{% extends 'TDGOAT/layout.html' %}
+
+{% block content %}
+	<h1>To-Do</h1>
+    <p>MAIN PYTHON VIEJAM</p>
+    <p>GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</p>
+    <form method="POST">
+    	{% csrf_token %}
+    	<input type="text" name="new_item" id="box_new_item" placeholder="Enter a to-do item">
+    </form>
+    <table id="table_todo_list">
+    	<tr>
+    		<td>{{ new_item_html }}</td>    		
+    	</tr>
+    </table>
+{% endblock content %}
