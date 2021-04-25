@@ -73,11 +73,10 @@ class NewVisitorTest(LiveServerTestCase):
         # it must be a different link that user A's list
         list_url_the_second = self.browser.current_url
         self.assertNotEqual(list_url_the_first, list_url_the_second)
-        self.wait_search_for_item_row_in_table("Buy peacock feathers")
 
         # if we go to users A list, it still exists
         self.browser.get(list_url_the_first)
-        self.wait_search_for_item_row_in_table('Buy peacock feathers')
+        self.wait_search_for_item_row_in_table('1: Buy peacock feathers')
 
     def wait_search_for_item_row_in_table(self, row_text):
         start_time = time.time()
