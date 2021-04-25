@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
-from lists.models import Item
+from lists.models import Item, List
 
 
 def new_list(request):
-    Item.objects.create(text=request.POST['new_item'])
+    list_ = List.objects.create()
+    Item.objects.create(text=request.POST['new_item'], list=list_)
     return redirect("/lists/the-one-and-only-forever-and-ever-till-the-end-of-time")
 
 
