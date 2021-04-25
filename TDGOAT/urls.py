@@ -19,6 +19,7 @@ from lists import views as listviews
 
 urlpatterns = [
     path('', listviews.index),
+    path('lists/new', listviews.new_list, name="new_list"),
     path('lists/the-one-and-only-forever-and-ever-till-the-end-of-time', listviews.view_list, name="view_list"),
     path('admin/', admin.site.urls),
 ]

@@ -7,23 +7,18 @@ from django.http.request import HttpRequest
 from django.template.loader import render_to_string 
 
 
-class SmokeTest(TestCase):
-    def test_bad_smoke(self):
-        self.assertEqual(2+1, 3)        
-        
-    # def test_index_returns_correct_html(self):
-    #     request = HttpRequest()
-    #     response = index(request)
-    #     html = response.content.decode('utf8')
-    #     self.assertTrue(html.strip().startswith('<html>'))
-    #     self.assertTrue(html.strip().endswith('</html>'))
-    #
-    # def test_home_page_returns_correct_html(self):
-    #     request = HttpRequest()
-    #     response = index(request)
-    #     html = response.content.decode()
-    #     expected_html = render_to_string('lists/index.html')
-    #     self.assertEqual(html, expected_html)
+class NewListTest(TestCase):
+    def test_can_save_POST_request(self):
+        self.client.post('/lists/new', data={'new_item': 'a new item'})
+
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'a new item')
+
+    def test_redirect_after_post(self):
+        response = self.client.post('/lists/new', data={'new_item': 'a new item'})
+        self.assertEqual(response.status_code, 302)
+        # self.assertRegex(self.client.current_url, "/lists/view/...") something like that format
 
 
 class ListViewTest(TestCase):
@@ -45,21 +40,6 @@ class HomePageTest(TestCase):
     def test_uses_home_template(self):
         response = self.client.get("/")
         self.assertTemplateUsed(response, 'lists/index.html')
-
-    def test_can_save_POST_request(self):
-        self.client.post('/', data={'new_item': 'a new item'})
-
-        self.assertEqual(Item.objects.count(), 1)
-        new_item = Item.objects.first()
-        self.assertEqual(new_item.text, 'a new item')
-
-    def test_redirect_after_post(self):
-        response = self.client.post('/', data={'new_item': 'a new item'})
-        self.assertEqual(response.status_code, 302)
-
-    def test_only_save_on_post(self):
-        self.client.get('/')
-        self.assertEqual(Item.objects.count(), 0)
 
 
 class ItemModelTest(TestCase):

@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>To-Do</h1>
     <p>ADDRESS [USER.NAME]'S LIST</p>
-    <form method="POST" action="/">
+    <form method="POST" action="/lists/new">
     	{% csrf_token %}
     	<input type="text" name="new_item" id="box_new_item" placeholder="Enter a to-do item">
     </form>

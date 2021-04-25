@@ -4,7 +4,7 @@
 	<h1>To-Do List</h1>
     <p>MMMAIN PYTHON</p>
     <p>MAKE YOUR OWN NEW LIST OF THINGS TO DO, IT WILL BE FUN I SWEAR</p>
-    <form method="POST" action="/">
+    <form method="POST" action="/lists/new">
     	{% csrf_token %}
     	<input type="text" name="new_item" id="box_new_item" placeholder="Enter a to-do item">
     </form>
